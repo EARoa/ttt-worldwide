@@ -1,0 +1,26 @@
+<center>
+  <h1>#TTT WorldWide</h1>
+</center>
+
+ <div id="map"></div>
+
+ <script>
+ $.getJSON("/api/places")
+ .done(function(data){
+   var pizzaIcon = L.icon({
+     iconUrl: 'https://s3.amazonaws.com/f.cl.ly/items/2X212c2t2m1B0G0h0f3h/pinpoint.png?v=56a37a73',
+     iconSize:    [52, 67], // size of the icon
+    //  iconAnchor:  [22, 94], // point of the icon which will correspond to marker's location
+ });
+   data.places.forEach(function(pizza){
+       L.marker([pizza.lat, pizza.lng], {icon: pizzaIcon})
+       .addTo(window.map)
+       .bindPopup(pizza.name);
+ });
+   });
+ </script>
+
+
+<center>
+<p class="btn btn-success" style="margin-top: 2em;"> <a href="/admin/place/new" style="color: white; text-decoration:none;"> Add yourself to the map! </a></p>
+</center>
